@@ -38,7 +38,7 @@ export default class BasicConcepts extends React.Component {
           selectedDays = {this.state.selectedDay} 
         />
         {this.state.selectedDay ? (
-          <p>You clicked {this.getUTSCday()} and week {this.getWeek()}</p>
+          <p>You clicked day: {this.getUTSCday()} and week: {this.getWeek()}</p>
         ) : (
           <p>Please select a day.</p>
         )}
