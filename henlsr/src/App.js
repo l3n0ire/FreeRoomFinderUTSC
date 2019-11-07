@@ -1,28 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Jotaro from './jotaro';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Jotaro/>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
+
+export default class BasicConcepts extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDayClick = this.handleDayClick.bind(this);
+    this.state = {
+      selectedDay: undefined,
+    };
+  }
+  
+
+  handleDayClick(day) {
+    this.setState({ selectedDay: day });
+  }
+  getUTSCday(){
+    if (this.state.selectedDay.getDay() == 0){
+      return 7;
+    }
+    return this.state.selectedDay.getDay()
+  }
+  getWeek(){
+    var d = new Date();
+    var firstDay = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
+    
+    return Math.ceil((this.state.selectedDay.getDate() + firstDay)/7) -1;
+  }
+
+  render() {
+    return (
+      <div>
+        <DayPicker 
+          onDayClick={this.handleDayClick}
+          selectedDays = {this.state.selectedDay} 
+        />
+        {this.state.selectedDay ? (
+          <p>You clicked {this.getUTSCday()} and week {this.getWeek()}</p>
+        ) : (
+          <p>Please select a day.</p>
+        )}
+      </div>
+    );
+  }
 }
-
-export default App;
