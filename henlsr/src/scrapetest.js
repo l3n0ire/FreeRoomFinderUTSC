@@ -15,7 +15,7 @@ var find_rooms = function(day, week, time) {
         .wait(2000)
 
         //Required to use jQuery
-        .inject('js', './node_modules/jquery/dist/jquery.min.js')
+        .inject('js', '../node_modules/jquery/dist/jquery.min.js')
 
         //Selects the current week from the calendar
         .evaluate(function(w)
