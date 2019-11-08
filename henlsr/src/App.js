@@ -10,9 +10,9 @@ export default class BasicConcepts extends React.Component {
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
       selectedDay: undefined,
+      week: undefined,
     };
   }
-  
 
   handleDayClick(day) {
     this.setState({ selectedDay: day });
@@ -23,24 +23,22 @@ export default class BasicConcepts extends React.Component {
     }
     return this.state.selectedDay.getDay()
   }
-  getWeek(){
-    var d = new Date();
-    var firstDay = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
-    
-    return Math.ceil((this.state.selectedDay.getDate() + firstDay)/7) -1;
-  }
+ 
 
   render() {
     return (
       <div>
         <DayPicker 
+          showWeekNumbers
           onDayClick={this.handleDayClick}
+          onWeekClick={(week) => this.setState({week: week})}
           selectedDays = {this.state.selectedDay} 
+          selectedWeeks = {this.state.week}
         />
         {this.state.selectedDay ? (
-          <p>You clicked day: {this.getUTSCday()} and week: {this.getWeek()}</p>
+  <p>You clicked day: {this.getUTSCday()} You Clicked week: {this.state.week}</p>
         ) : (
-          <p>Please select a day.</p>
+          <p>Select a day, then select a week.</p>
         )}
       </div>
     );
